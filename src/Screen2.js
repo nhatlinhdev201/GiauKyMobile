@@ -6,6 +6,7 @@ const Screen2 = ({ navigation, route }) => {
 
     const [search, setSearch] = useState('')
     const [jobs, setJobs] = useState(todos)
+    const [filteredJobs, setFilteredJobs] = useState(jobs);
 
     const { userName, updatedJob, newJob } = route.params;
 
@@ -23,6 +24,13 @@ const Screen2 = ({ navigation, route }) => {
         }
     }, [updatedJob, newJob, jobs]);
 
+    /* Chức năng Search */
+    useEffect(() => {
+        const filtered = jobs.filter((item) =>
+            item.job.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilteredJobs(filtered);
+    }, [search, jobs]);
 
     // Tùy chỉnh headerRight để hiển thị tên người dùng
     useEffect(() => {
@@ -72,8 +80,8 @@ const Screen2 = ({ navigation, route }) => {
                     }}
                 />
             </View>
-            <FlatList
-                data={jobs}
+            <FlatList 
+                data={filteredJobs}
                 renderItem={({ item }) => (
                     <View
                         style={{
@@ -114,7 +122,7 @@ const Screen2 = ({ navigation, route }) => {
                         </Text>
                         <Pressable
                             onPress={() => navigation.navigate('Screen3', {
-                                selectedJob : item
+                                selectedJob: item
                             })}
                         >
                             <Image
@@ -141,11 +149,11 @@ const Screen2 = ({ navigation, route }) => {
                     marginTop: 30
                 }}
                 onPress={() => {
-                    navigation.navigate('Screen3', {selectedJob : null})
+                    navigation.navigate('Screen3', { selectedJob: null })
                 }}
             >
                 <Text
-                    style={{ 
+                    style={{
                         fontSize: 30,
                         fontWeight: 700,
                         color: 'white',

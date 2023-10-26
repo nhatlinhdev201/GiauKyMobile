@@ -36,7 +36,7 @@ const Screen3 = ({ navigation, route }) => {
                 flex : 1,
                 alignItems : 'center',
                 backgroundColor : 'white'
-            }}
+            }} 
         >
             <Text
                 style={{
