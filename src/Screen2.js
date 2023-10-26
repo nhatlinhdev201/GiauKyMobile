@@ -22,7 +22,7 @@ const Screen2 = ({ navigation, route }) => {
             // Thêm công việc mới
             setJobs([...jobs, newJob]);
         }
-    }, [updatedJob, newJob, jobs]);
+    }, [updatedJob, newJob]);
 
     /* Chức năng Search */
     useEffect(() => {
